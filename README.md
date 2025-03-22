@@ -2,7 +2,7 @@
 <h1 align="center">termplay</h1>
 
 <p align="center">
-<a href="#repository-structure"><img src="https://img.shields.io/badge/structure-BD93F9?style=for-the-badge"></a>
+<a href="_docs/development.md"><img src="https://img.shields.io/badge/development-BD93F9?style=for-the-badge"></a>
 <a href="#how-to-execute-games"><img src="https://img.shields.io/badge/how%20to%20run-BD93F9?style=for-the-badge"></a>
 </p>
 
@@ -13,6 +13,8 @@ This is a dedicated space where we house a collection of simple games written in
 ## Repository Structure
 
 There is a directory for each programming language, and within each directory, there are different subdirectories for different game projects.
+
+For guidelines on coding conventions and project structure, refer to the [Development Guide](docs/development.md).
 
 ## How To Execute Games
 
