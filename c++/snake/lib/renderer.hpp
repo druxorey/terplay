@@ -7,4 +7,5 @@ class Renderer {
 	public:
 		void board(int rect_x, int rect_y);
 		void player(int playerXPosition, int playerYPosition);
+		void generateFood();
 };

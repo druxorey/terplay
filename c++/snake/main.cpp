@@ -11,6 +11,7 @@ int score = 0;
 int main() {
     setlocale(LC_ALL, ""); // Set the locale for the program
     initscr(); // Initialize the ncurses screen
+	timeout(300); // Non-blocking getch()
     cbreak(); // Disable line buffering, pass on everything to the program
     noecho(); // Don't echo input characters
     curs_set(FALSE); // Hide the default screen cursor
@@ -26,18 +27,27 @@ int main() {
 	short playerXPosition, playerYPosition;
 	short anchorXPoint, anchorYPoint;
 
-	char lastMove = ' ';
+	char lastMove = 'w';
 
 	getmaxyx(stdscr, TERM_HEIGHT, TERM_WIDTH);
 
 	playerXPosition = (TERM_WIDTH / 2) - 1;
 	playerYPosition = (TERM_HEIGHT / 2);
 
+	bool isRunning = true;
+
 	do {
+		if (isRunning) {
+			mainRender.generateFood();
+			isRunning = false;
+		}
+
 		getmaxyx(stdscr, TERM_HEIGHT, TERM_WIDTH);
 
 		anchorXPoint = (TERM_WIDTH - BOARD_MAX_WIDTH) / 2;
 		anchorYPoint = (TERM_HEIGHT - BOARD_MAX_HEIGHT) / 2;
+
+		movePlayer(playerXPosition, playerYPosition, anchorXPoint, anchorYPoint, lastMove, score);
 
 		clear();
 
@@ -51,8 +61,6 @@ int main() {
 		mvprintw(BOARD_MAX_HEIGHT + anchorYPoint, TERM_WIDTH / 2 - 4, "Score: %d", score);
 
 		refresh();
-
-		movePlayer(playerXPosition, playerYPosition, anchorXPoint, anchorYPoint, lastMove);
 
 	} while (true);
 
