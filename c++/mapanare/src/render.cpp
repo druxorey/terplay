@@ -24,3 +24,11 @@ void Render::outline(short &termWidth, short &termHeight) {
 		mvprintw(i, horizontalEnd, "│");    // Right edge
 	}
 }
+
+void Render::player(short &termWidth, short &termHeight, short playerXPosition, short playerYPositiion) {
+	int verticalStart = (termHeight - BOARD_HEIGHT) / 2;
+	int horizontalStart = (termWidth - BOARD_WIDTH) / 2;
+
+	mvprintw(verticalStart + playerYPositiion, horizontalStart + playerXPosition, "◉"); // Player character
+
+}
