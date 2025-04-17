@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include <locale.h>
 
+#include "lib/render.hpp"
+
 int main(int argc, char *argv[]) {
     setlocale(LC_ALL, ""); // Set the locale for the program
     initscr(); // Initialize the ncurses screen
@@ -15,11 +17,16 @@ int main(int argc, char *argv[]) {
 	
 	short TERM_WIDTH = 0, TERM_HEIGHT = 0;
 
+	Render render;
+
 	do {
 		getmaxyx(stdscr, TERM_HEIGHT, TERM_WIDTH); // Get the current terminal size
 
 		clear();
 		mvprintw(0, 0, "TERM_WIDTH: %d, TERM_HEIGHT: %d", TERM_WIDTH, TERM_HEIGHT);
+
+		render.outline(TERM_WIDTH, TERM_HEIGHT);
+
 		refresh();
 		sleep(1);
 	} while (true);
