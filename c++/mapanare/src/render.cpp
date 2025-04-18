@@ -1,34 +1,26 @@
 #include "../lib/render.hpp"
 
-void Render::outline(short &termWidth, short &termHeight) {
-	int verticalStart = (termHeight - BOARD_HEIGHT) / 2;
-	int horizontalStart = (termWidth - BOARD_WIDTH) / 2;
-	int verticalEnd = verticalStart + BOARD_HEIGHT;
-	int horizontalEnd = horizontalStart + BOARD_WIDTH;
+void Render::printOutline() {
 
 	// Draw corners
-	mvprintw(verticalStart, horizontalStart, "╭"); // Top-left corner
-	mvprintw(verticalStart, horizontalEnd, "╮");   // Top-right corner
-	mvprintw(verticalEnd, horizontalStart, "╰");   // Bottom-left corner
-	mvprintw(verticalEnd, horizontalEnd, "╯");     // Bottom-right corner
+	mvprintw(this->board.yStart, this->board.xStart, "╭"); // Top-left corner
+    mvprintw(this->board.yStart, this->board.xEnd, "╮");   // Top-right corner
+    mvprintw(this->board.yEnd, this->board.xStart, "╰");   // Bottom-left corner
+    mvprintw(this->board.yEnd, this->board.xEnd, "╯");     // Bottom-right corner
 
-	// Draw horizontal edges
-	for (int j = horizontalStart + 1; j < horizontalEnd; j++) {
-		mvprintw(verticalStart, j, "─");  // Top edge
-		mvprintw(verticalEnd, j, "─");    // Bottom edge
-	}
+    // Draw x edges
+    for (int j = this->board.xStart + 1; j < this->board.xEnd; j++) {
+        mvprintw(this->board.yStart, j, "─");  // Top edge
+        mvprintw(this->board.yEnd, j, "─");    // Bottom edge
+    }
 
-	// Draw vertical edges
-	for (int i = verticalStart + 1; i < verticalEnd; i++) {
-		mvprintw(i, horizontalStart, "│");  // Left edge
-		mvprintw(i, horizontalEnd, "│");    // Right edge
-	}
+    // Draw y edges
+    for (int i = this->board.yStart + 1; i < this->board.yEnd; i++) {
+        mvprintw(i, this->board.xStart, "│");  // Left edge
+        mvprintw(i, this->board.xEnd, "│");    // Right edge
+    }
 }
 
-void Render::player(short &termWidth, short &termHeight, short playerXPosition, short playerYPositiion) {
-	int verticalStart = (termHeight - BOARD_HEIGHT) / 2;
-	int horizontalStart = (termWidth - BOARD_WIDTH) / 2;
-
-	mvprintw(verticalStart + playerYPositiion, horizontalStart + playerXPosition, "◉"); // Player character
-
+void Render::printPlayer(short &playerXPosition, short &playerYPositiion) {
+	mvprintw(this->board.yStart + playerYPositiion, this->board.xStart + playerXPosition, "◉"); // Player character
 }
