@@ -17,25 +17,29 @@ int main(int argc, char *argv[]) {
     start_color(); // Enable color functionality in ncurses
 	
 	short TERM_WIDTH = 0, TERM_HEIGHT = 0;
-	short PLAYER_POS_X = 0, PLAYER_POS_Y = 0;
+	getmaxyx(stdscr, TERM_HEIGHT, TERM_WIDTH); // Get the current terminal size
 
 	Render render;
+
+	render.playerPos.x = 18;
+	render.playerPos.y = 18;
 
 	do {
 		getmaxyx(stdscr, TERM_HEIGHT, TERM_WIDTH); // Get the current terminal size
 
-		render.board.yStart = (TERM_HEIGHT - BOARD_HEIGHT) / 2;
-		render.board.xStart = (TERM_WIDTH - BOARD_WIDTH) / 2;
-		render.board.yEnd = render.board.yStart + BOARD_HEIGHT;
-		render.board.xEnd = render.board.xStart + BOARD_WIDTH;
+		render.boardCoords.yStart = (TERM_HEIGHT - BOARD_HEIGHT) / 2;
+		render.boardCoords.xStart = (TERM_WIDTH - BOARD_WIDTH) / 2;
+		render.boardCoords.yEnd = render.boardCoords.yStart + BOARD_HEIGHT;
+		render.boardCoords.xEnd = render.boardCoords.xStart + BOARD_WIDTH;
 
-		movePlayer(PLAYER_POS_X, PLAYER_POS_Y); // Move the player based on input
+		movePlayer(render.playerPos.x, render.playerPos.y); // Move the player based on input
 
 		clear();
 		mvprintw(0, 0, "TERM_WIDTH: %d, TERM_HEIGHT: %d", TERM_WIDTH, TERM_HEIGHT);
+		mvprintw(1, 0, "Player X: %d, Player Y: %d", render.playerPos.x, render.playerPos.y);
 
 		render.printOutline();
-		render.printPlayer(PLAYER_POS_X, PLAYER_POS_Y);
+		render.printPlayer();
 
 		refresh();
 	} while (true);
