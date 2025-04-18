@@ -14,10 +14,10 @@ struct Player {
 
 
 struct Board {
-    short xStart = 0;
-    short xEnd = 0;
-    short yStart = 0;
-    short yEnd = 0;
+	short xStart = 0;
+	short xEnd = 0;
+	short yStart = 0;
+	short yEnd = 0;
 };
 
 
